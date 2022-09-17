@@ -1,15 +1,19 @@
-package com.example.proyecto1_ce_musicplayer_carlosfelipe;
+package com.example.login;
 /**
  * Sample Skeleton for 'LoginScreen.fxml' Controller Class
  */
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
-public class LoginController {
+public class LoginController implements Initializable {
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -25,6 +29,16 @@ public class LoginController {
 
     @FXML // fx:id="user"
     private TextField user; // Value injected by FXMLLoader
+    @FXML
+    private void eventKey(KeyEvent event) {
+
+    }
+    @FXML
+    private void eventAction(ActionEvent event) {
+        Object evt = event.getSource();
+
+
+        }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -33,5 +47,8 @@ public class LoginController {
         assert user != null : "fx:id=\"user\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 
     }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
 
+    }
 }

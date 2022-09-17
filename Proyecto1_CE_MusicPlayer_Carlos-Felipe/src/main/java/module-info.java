@@ -3,6 +3,6 @@ module com.example.proyecto1_ce_musicplayer_carlosfelipe {
     requires javafx.fxml;
 
 
-    opens com.example.proyecto1_ce_musicplayer_carlosfelipe to javafx.fxml;
-    exports com.example.proyecto1_ce_musicplayer_carlosfelipe;
+    opens com.example.login to javafx.fxml;
+    exports com.example.login;
 }

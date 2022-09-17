@@ -1,4 +1,4 @@
-package com.example.proyecto1_ce_musicplayer_carlosfelipe;
+package com.example.login;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MP3App extends Application {
+public class LoginApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApp.class.getResource("MP3Screen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApp.class.getResource("LoginScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Login");
         stage.setScene(scene);

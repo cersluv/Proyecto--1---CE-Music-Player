@@ -1,10 +1,12 @@
-package com.example.proyecto1_ce_musicplayer_carlosfelipe;
+package com.example.mp3;
 
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+
 public class MP3Controller {
 
     @FXML // ResourceBundle that was given to the FXMLLoader

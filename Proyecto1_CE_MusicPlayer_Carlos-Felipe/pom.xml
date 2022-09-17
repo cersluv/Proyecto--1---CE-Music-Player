@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.proyecto1_ce_musicplayer_carlosfelipe/com.example.proyecto1_ce_musicplayer_carlosfelipe.LoginApp
+                                com.example.proyecto1_ce_musicplayer_carlosfelipe/com.example.login.LoginApp
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
