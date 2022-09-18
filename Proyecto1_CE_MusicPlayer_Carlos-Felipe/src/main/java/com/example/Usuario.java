@@ -6,9 +6,7 @@ public class Usuario {
     private String correo;
     private String provincia;
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() {return nombre;}
 
     public String getContraseña() {
         return contraseña;

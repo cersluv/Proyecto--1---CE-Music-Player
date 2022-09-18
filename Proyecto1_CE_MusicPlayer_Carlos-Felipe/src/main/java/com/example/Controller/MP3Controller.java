@@ -1,6 +1,7 @@
 package com.example.Controller;
 
 
+import com.example.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,8 +27,15 @@ public class MP3Controller {
 
     @FXML // fx:id="logout"
     private Button logout; // Value injected by FXMLLoader
+    @FXML
+    private Label user1;
+    @FXML
+    private Label correo1;
+    @FXML
+    private Label prov1;
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
+        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert cerrar2 != null : "fx:id=\"cerrar2\" was not injected: check your FXML file 'MP3Screen.fxml'.";
         assert logout != null : "fx:id=\"logout\" was not injected: check your FXML file 'MP3Screen.fxml'.";
@@ -43,12 +51,14 @@ public class MP3Controller {
         stage.close();
     }
 
-    public void init(Stage stage, LoginController loginController) {
+    public void init(Stage stage, LoginController loginController, String[] list) {
+        user1.setText(list[0]);
+        correo1.setText(list[3]);
+        prov1.setText(list[2]);
         this.controlladorLogin = loginController;
         this.stage = stage;
-    }
+            }
+
+
+
 }
-
-
-
-

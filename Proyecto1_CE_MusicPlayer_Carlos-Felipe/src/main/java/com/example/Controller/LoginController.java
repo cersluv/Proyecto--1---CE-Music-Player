@@ -88,7 +88,7 @@ public class LoginController implements Initializable {
                     Scene scene = new Scene (root);
                     Stage stage = new Stage ();
                     stage.setScene(scene);
-                    controller.init(stage, this);
+                    controller.init(stage, this, lista);
                     stage.show();
                     this.stage.close();
                 }
