@@ -2,11 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="738.0" style="-fx-background-color: #1ed760;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controller.LoginController">
 
@@ -14,24 +16,37 @@
       <TextField fx:id="user" layoutX="295.0" layoutY="194.0" />
       <ImageView fitHeight="43.0" fitWidth="44.0" layoutX="219.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/crseg/OneDrive/Escritorio/Proyecto%20%231%20-%20CE%20Music%20Player/Proyecto--1---CE-Music-Player/Proyecto1_CE_MusicPlayer_Carlos-Felipe/src/Imagenes/USER.png" />
+            <Image url="file:/C:/Users/Yoshant/Desktop/Proyecto--1---CE-Music-Player/Proyecto1_CE_MusicPlayer_Carlos-Felipe/src/Imagenes/USER.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="215.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/crseg/OneDrive/Escritorio/Proyecto%20%231%20-%20CE%20Music%20Player/Proyecto--1---CE-Music-Player/Proyecto1_CE_MusicPlayer_Carlos-Felipe/src/Imagenes/PASS.png" />
+            <Image url="file:/C:/Users/Yoshant/Desktop/Proyecto--1---CE-Music-Player/Proyecto1_CE_MusicPlayer_Carlos-Felipe/src/Imagenes/PASS.png" />
          </image>
       </ImageView>
-      <Button fx:id="login" layoutX="316.0" layoutY="348.0" mnemonicParsing="false" onAction="#obtener" prefHeight="25.0" prefWidth="108.0" text="Iniciar Sesión" />
-      <Button layoutX="568.0" layoutY="480.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="¿Olvidaste tu contraseña?" />
-      <CheckBox layoutX="295.0" layoutY="313.0" mnemonicParsing="false" text="Mantener Sesión iniciada" />
-      <ImageView fitHeight="178.0" fitWidth="400.0" layoutX="172.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="file:/C:/Users/crseg/OneDrive/Escritorio/Proyecto%20%231%20-%20CE%20Music%20Player/Proyecto--1---CE-Music-Player/Proyecto1_CE_MusicPlayer_Carlos-Felipe/src/Imagenes/TileFinalFinal.png" />
-         </image>
-      </ImageView>
+      <Button fx:id="login" layoutX="316.0" layoutY="348.0" mnemonicParsing="false" onAction="#obtener" prefHeight="25.0" prefWidth="129.0" text="Iniciar Sesión" />
+      <CheckBox layoutX="285.0" layoutY="311.0" mnemonicParsing="false" text="Mantener Sesión iniciada">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></CheckBox>
       <PasswordField fx:id="contra" layoutX="295.0" layoutY="273.0" />
-      <Button fx:id="cerrar" layoutX="696.0" layoutY="14.0" mnemonicParsing="false" onAction="#btncerrar" prefHeight="28.0" prefWidth="28.0" text="X" />
-      <Button layoutX="418.0" layoutY="480.0" mnemonicParsing="false" onAction="#registrar" text="¿No tienes una cuenta?" />
+      <Button fx:id="cerrar" layoutX="698.0" layoutY="6.0" mnemonicParsing="false" onAction="#btncerrar" prefHeight="28.0" prefWidth="28.0" style="-fx-background-color: red;" text="X" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="ArtifaktElement-Heavy" size="16.0" />
+         </font></Button>
+      <Button layoutX="557.0" layoutY="482.0" mnemonicParsing="false" onAction="#registrar" text="¿No tienes una cuenta?">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></Button>
+      <Label fx:id="malo" layoutX="449.0" layoutY="239.0" prefHeight="15.0" prefWidth="152.0" text="Credenciales incorrectas" visible="false">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="176.0" fitWidth="444.0" layoutX="170.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:/C:/Users/Yoshant/Desktop/Proyecto--1---CE-Music-Player/Proyecto1_CE_MusicPlayer_Carlos-Felipe/src/Imagenes/TileFinalFinal.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

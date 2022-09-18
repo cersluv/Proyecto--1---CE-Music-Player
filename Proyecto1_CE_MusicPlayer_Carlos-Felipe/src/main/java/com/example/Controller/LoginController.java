@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -34,14 +35,17 @@ public class LoginController implements Initializable {
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
 
-    @FXML // fx:id="contra"
-    private TextField contra; // Value injected by FXMLLoader
+    @FXML
+    private TextField contra;
 
-    @FXML // fx:id="login"
-    private Button login; // Value injected by FXMLLoader
+    @FXML
+    private Button login;
 
-    @FXML // fx:id="user"
-    private TextField user; // Value injected by FXMLLoader
+    @FXML
+    private TextField user;
+    @FXML
+    private Label malo;
+
     @FXML
     private void eventKey(KeyEvent event) {
 
@@ -88,7 +92,9 @@ public class LoginController implements Initializable {
                     stage.show();
                     this.stage.close();
                 }
-
+                else{
+                    malo.setVisible(true);
+                }
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -117,7 +123,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-
     }
 
     public void show() {
