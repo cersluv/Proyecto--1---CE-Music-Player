@@ -8,7 +8,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane prefHeight="519.0" prefWidth="738.0" style="-fx-background-color: #1ed760;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="738.0" style="-fx-background-color: #1ed760;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.LoginController">
+
    <children>
       <TextField fx:id="user" layoutX="295.0" layoutY="194.0" />
       <ImageView fitHeight="43.0" fitWidth="44.0" layoutX="219.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
@@ -21,7 +22,7 @@
             <Image url="file:/C:/Users/crseg/OneDrive/Escritorio/Proyecto%20%231%20-%20CE%20Music%20Player/Proyecto--1---CE-Music-Player/Proyecto1_CE_MusicPlayer_Carlos-Felipe/src/Imagenes/PASS.png" />
          </image>
       </ImageView>
-      <Button fx:id="login" layoutX="316.0" layoutY="348.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Iniciar Sesión" />
+      <Button fx:id="login" layoutX="316.0" layoutY="348.0" mnemonicParsing="false" onAction="#obtener" prefHeight="25.0" prefWidth="108.0" text="Iniciar Sesión" />
       <Button layoutX="568.0" layoutY="480.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="¿Olvidaste tu contraseña?" />
       <CheckBox layoutX="295.0" layoutY="313.0" mnemonicParsing="false" text="Mantener Sesión iniciada" />
       <ImageView fitHeight="178.0" fitWidth="400.0" layoutX="172.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -30,5 +31,6 @@
          </image>
       </ImageView>
       <PasswordField fx:id="contra" layoutX="295.0" layoutY="273.0" />
+      <Button fx:id="cerrar" layoutX="696.0" layoutY="14.0" mnemonicParsing="false" onAction="#btncerrar" prefHeight="28.0" prefWidth="28.0" text="X" />
    </children>
 </Pane>

@@ -1,6 +1,6 @@
 package com.example;
 
-public class User {
+public class Usuario {
     private String nombre;
     private String contraseña;
     private String correo;
@@ -21,5 +21,13 @@ public class User {
     public String getProvincia() {
         return provincia;
     }
+
+    public Usuario(String nombre, String contraseña, String correo, String provincia) {
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.correo = correo;
+        this.provincia = provincia;
+    }
+
 
 }

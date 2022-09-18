@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="738.0" style="-fx-background-color: #1ed760;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane id="Menu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="738.0" style="-fx-background-color: #1ed760;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mp3.MP3Controller">
     <children>
         <Label layoutX="283.0" layoutY="200.0" prefHeight="38.0" prefWidth="173.0" text="Hola Mundo" textFill="#0d0d0d">
             <font>
                 <Font name="Candara" size="31.0" />
             </font>
         </Label>
-        <Button fx:id="explote" layoutX="578.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Salir" />
+        <Button fx:id="cerrar2" layoutX="578.0" layoutY="14.0" mnemonicParsing="false" onAction="#btncerrar2" prefHeight="25.0" prefWidth="156.0" text="Salir" />
         <Button fx:id="logout" layoutX="578.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Cerrar Sesión" />
     </children>
 </Pane>
