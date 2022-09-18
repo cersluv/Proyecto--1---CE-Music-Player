@@ -1,11 +1,8 @@
-package com.example.mp3;
+package com.example.Controller;
 
 
-import com.example.login.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -13,6 +10,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MP3Controller {
+    private Stage stage;
+    private LoginController controlladorLogin;
 
 
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -34,7 +33,18 @@ public class MP3Controller {
 
     }
 
-    public void btncerrar2(ActionEvent actionEvent) {
+    public void btncerrar2(ActionEvent event) {
+        stage.close();
+    }
+
+    public void regresar(ActionEvent event) {
+        controlladorLogin.show();
+        stage.close();
+    }
+
+    public void init(Stage stage, LoginController loginController) {
+        this.controlladorLogin = loginController;
+        this.stage = stage;
     }
 }
 

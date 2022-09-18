@@ -1,4 +1,4 @@
-package com.example.login;
+package com.example.Controller;
 /**
  * Sample Skeleton for 'LoginScreen.fxml' Controller Class
  */
@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import com.example.mp3.MP3Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
@@ -79,12 +78,13 @@ public class LoginController implements Initializable {
                 String line = inputBuffer.nextLine();
                 String[] lista = line.split(",");
                 if (lista[0].equals(usuario) && lista[1].equals(contraseña)){
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.example.mp3/MP3Screen.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Controller/MP3Screen.fxml"));
                     Parent root = loader.load();
                     MP3Controller controller = loader.getController();
                     Scene scene = new Scene (root);
                     Stage stage = new Stage ();
                     stage.setScene(scene);
+                    controller.init(stage, this);
                     stage.show();
                     this.stage.close();
                 }
@@ -98,6 +98,18 @@ public class LoginController implements Initializable {
         }
 
 
+    }
+    @FXML
+    public void registrar(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Register/Registro.fxml"));
+        Parent root = loader.load();
+        RegisterController controller = loader.getController();
+        Scene scene = new Scene (root);
+        Stage stage = new Stage ();
+        stage.setScene(scene);
+        controller.init(stage, this);
+        stage.show();
+        this.stage.close();
     }
     public void setStage(Stage primaryStage){
         stage = primaryStage;

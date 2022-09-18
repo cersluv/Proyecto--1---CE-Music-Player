@@ -1,5 +1,6 @@
-package com.example.login;
+package com.example.Apps;
 
+import com.example.Controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

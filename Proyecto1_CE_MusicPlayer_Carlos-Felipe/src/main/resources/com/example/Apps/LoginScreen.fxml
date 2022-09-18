@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="738.0" style="-fx-background-color: #1ed760;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.LoginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="738.0" style="-fx-background-color: #1ed760;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controller.LoginController">
 
    <children>
       <TextField fx:id="user" layoutX="295.0" layoutY="194.0" />
@@ -32,5 +32,6 @@
       </ImageView>
       <PasswordField fx:id="contra" layoutX="295.0" layoutY="273.0" />
       <Button fx:id="cerrar" layoutX="696.0" layoutY="14.0" mnemonicParsing="false" onAction="#btncerrar" prefHeight="28.0" prefWidth="28.0" text="X" />
+      <Button layoutX="418.0" layoutY="480.0" mnemonicParsing="false" onAction="#registrar" text="¿No tienes una cuenta?" />
    </children>
 </Pane>
