@@ -1,6 +1,8 @@
 module com.example.proyecto1_ce_musicplayer_carlosfelipe {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.xml;
+    requires java.logging;
 
     opens com.example.Apps to javafx.fxml;
     exports com.example.Apps;
