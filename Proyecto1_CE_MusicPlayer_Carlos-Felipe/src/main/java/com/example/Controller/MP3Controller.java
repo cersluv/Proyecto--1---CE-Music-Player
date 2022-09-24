@@ -284,19 +284,21 @@ public class MP3Controller {
                 //playlist.showPlaylist();
             }
         }
-        File f = new File(playlist.current.getPath());
-        System.out.println(playlist.current.getPath());
+        String arch1 = playlist.current.getPath();
+        String arch = arch1.replace("/","\\\\");
+        File f = new File(arch);
         URI dir = f.toURI();
-        musica = new Media(String.valueOf(dir));
+        musica = new Media(dir.toString());
         reproductor = new MediaPlayer(musica);
+
     }
-    public void reproducir(){
+    public void reproducir(ActionEvent event){
         reproductor.play();
     }
-    public void pausar(){
+    public void pausar(ActionEvent event){
         reproductor.pause();
     }
-    public void reiniciar(){
+    public void reiniciar(ActionEvent event){
         reproductor.seek(Duration.seconds(0));
         reproductor.play();
     }

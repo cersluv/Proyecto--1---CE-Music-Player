@@ -3,18 +3,10 @@ package com.example.Controller;
  * Sample Skeleton for 'LoginScreen.fxml' Controller Class
  */
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Scanner;
-
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,7 +14,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 
 /**
  * Controlador de la pantalla de loggeo, acá se ponen los datos del usuario y se inicia sesión con su cuenta.
@@ -127,6 +129,7 @@ public class LoginController implements Initializable {
         controller.init(stage, this);
         stage.show();
         this.stage.close();
+
     }
     /**
      * Método el cual define en cual stage se está trabajando

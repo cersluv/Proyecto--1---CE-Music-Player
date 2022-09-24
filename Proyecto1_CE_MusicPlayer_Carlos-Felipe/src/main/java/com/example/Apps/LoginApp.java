@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 /**
  * clase para iniciar el programa, llama al controlador de la pantalla de loggeo.
  */

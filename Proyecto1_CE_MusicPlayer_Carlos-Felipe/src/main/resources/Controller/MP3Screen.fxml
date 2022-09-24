@@ -118,8 +118,8 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1ed760;">
                <children>
                   <Button fx:id="play" layoutX="413.0" layoutY="425.0" mnemonicParsing="false" onAction="#reproducir" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="⫸" textFill="#1ed760" />
-                  <Button fx:id="pause" layoutX="354.0" layoutY="425.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="| |" textFill="#1ed760" />
-                  <Button fx:id="reset" layoutX="468.0" layoutY="425.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="■" textFill="#1ed760" />
+                  <Button fx:id="pause" layoutX="354.0" layoutY="425.0" mnemonicParsing="false" onAction="#pausar" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="| |" textFill="#1ed760" />
+                  <Button fx:id="reset" layoutX="468.0" layoutY="425.0" mnemonicParsing="false" onAction="#reiniciar" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="■" textFill="#1ed760" />
                   <Button fx:id="next" layoutX="524.0" layoutY="425.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="&gt;&gt;" textFill="#1ed760" />
                   <Button fx:id="previous" layoutX="298.0" layoutY="425.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="&lt;&lt;" textFill="#1ed760" />
                   <ProgressBar layoutX="154.0" layoutY="382.0" prefHeight="18.0" prefWidth="552.0" progress="0.0" />
