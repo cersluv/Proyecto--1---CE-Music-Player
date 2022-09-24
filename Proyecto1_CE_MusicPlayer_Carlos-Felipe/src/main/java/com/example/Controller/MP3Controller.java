@@ -1,6 +1,8 @@
 package com.example.Controller;
 
 
+import com.example.LinkedList;
+import com.example.Nodos;
 import com.example.XML;
 import com.example.songs;
 import javafx.event.ActionEvent;
@@ -21,6 +23,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -89,13 +92,17 @@ public class MP3Controller {
     @FXML
     private CheckBox fav2;
 
+    @FXML
+    private Label nombresong;
 
+    @FXML
+    private Button charge;
 
     /**
      * Variable para obtener Files de canciones
      */
     private File canci;
-
+    public LinkedList playlist = new LinkedList();
 
     @FXML
         // This method is called by the FXMLLoader when initialization is complete
@@ -163,7 +170,7 @@ public class MP3Controller {
             documento.setXmlVersion("1.0");
 
 
-            Element canciones = documento.createElement("Canciones");
+            Element canciones = documento.createElement("Cancion");
 
 
             Element path = documento.createElement("path");
@@ -248,5 +255,40 @@ public class MP3Controller {
 
 
     }
+
+    public void cargarbiblio(MouseEvent mouseEvent) throws ParserConfigurationException,
+            SAXException, IOException{
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document = builder.parse(new File("Pop.xml"));
+        NodeList nodeList = document.getDocumentElement().getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element elem = (Element) node;
+                String direccion = elem.getElementsByTagName("path")
+                        .item(0).getChildNodes().item(0).getNodeValue();
+                String namesong = elem.getElementsByTagName("nombre").item(0)
+                        .getChildNodes().item(0).getNodeValue();
+                String favorite = elem.getElementsByTagName("favorita").item(0)
+                        .getChildNodes().item(0).getNodeValue();
+                Nodos can = new Nodos(direccion, namesong, favorite);
+                playlist.añadir(direccion, namesong, favorite);
+            }
+
+        }
+    }
+    public void reproducir(){
+    }
+    public void pausar(){
+    }
+    public void reiniciar(){
+    }
+    public void sigSong(){
+    }
+    public void antSong(){
+    }
+
 
 }

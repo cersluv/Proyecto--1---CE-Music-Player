@@ -7,16 +7,16 @@ import java.io.Serializable;
  */
 public class songs implements Serializable {
 
-    public String nombre ;
-    public String path ;
-    public String favorita ;
+    public String nombre;
+    public String path;
+    public String favorita;
 
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getPath(){
+    public String getPath() {
         return path;
 
     }
@@ -36,6 +36,7 @@ public class songs implements Serializable {
     public void setFavorita(String favorita) {
         this.favorita = favorita;
     }
+
     /**
      * Método Contructor de la clase "songs"
      */
@@ -44,5 +45,11 @@ public class songs implements Serializable {
         this.nombre = nombre;
         this.favorita = favorita;
 
+    }
+
+
+    @Override
+    public String toString() {
+        return "[" + path + ", " + nombre + ", " + favorita + "]";
     }
 }
