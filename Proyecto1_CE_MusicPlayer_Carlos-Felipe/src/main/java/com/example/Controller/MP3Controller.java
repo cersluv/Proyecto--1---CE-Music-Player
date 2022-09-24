@@ -182,7 +182,7 @@ public class MP3Controller {
     }
 
     @FXML
-    public void addTo(MouseEvent event) throws ParserConfigurationException, IOException, SAXException {
+    public void addTo(MouseEvent event) throws ParserConfigurationException, IOException, SAXException, TransformerException {
         int i = 0;
         if (fav.isSelected()) {
             i = 1;
@@ -190,6 +190,7 @@ public class MP3Controller {
             i = 0;
         }
         String biblioteca = biblioselec.getText();
+        System.out.println(biblioteca);
         canci = seleccionador.showOpenDialog(new Stage());
         nombrec = canci.getName();
         String cancan = String.valueOf(canci);
@@ -197,13 +198,32 @@ public class MP3Controller {
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse(new File(biblioselec+".xml"));
+        Document doc = docBuilder.parse(new File(biblioteca+".xml"));
         doc.getDocumentElement().normalize();
         Node nodoRaiz = doc.getDocumentElement();
 
         Element nuevaCancion=doc.createElement("cancion");
-        Element nuevoPath = doc.createElement("path");
 
+
+        Element nuevoPath = doc.createElement("path");
+        nuevoPath.setTextContent(cancan);
+        nuevaCancion.appendChild(nuevoPath);
+
+        Element nuevoNombre = doc.createElement("nombre");
+        nuevoNombre.setTextContent(nombrec);
+        nuevaCancion.appendChild(nuevoNombre);
+
+        Element nuevoFavorita = doc.createElement("favorita");
+        nuevoFavorita.setTextContent(Integer.toString(i));
+        nuevaCancion.appendChild(nuevoFavorita);
+
+        nodoRaiz.appendChild(nuevaCancion);
+
+        TransformerFactory transFactory = TransformerFactory.newInstance();
+        Transformer transformer = transFactory.newTransformer();
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(new File (biblioteca+".xml"));
+        transformer.transform(source, result);
 
 
     }
