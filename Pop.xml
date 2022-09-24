@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<biblioteca>
+    <Cancion>
+        <path>C:\Users\Yoshant\Documents\Felipe\TEC\2do Semestre\Algoritmos y Estructuras de Datos I\Proyecto
+            1\canciones\Jardín.mp3
+        </path>
+        <nombre>Jardín.mp3</nombre>
+        <favorita>1</favorita>
+    </Cancion>
+    <cancion>
+        <path>C:\Users\Yoshant\Documents\Felipe\TEC\2do Semestre\Algoritmos y Estructuras de Datos I\Proyecto
+            1\canciones\Cuéntale.mp3
+        </path>
+        <nombre>Cuéntale.mp3</nombre>
+        <favorita>1</favorita>
+    </cancion>
+</biblioteca>
