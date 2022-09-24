@@ -1,16 +1,11 @@
 package com.example;
 
-import java.io.Serializable;
-
-public class Nodos implements Serializable {
+public class Nodos{
     public String path;
     public String nombrecan;
     public Nodos next;
     public Nodos prev;
     public String fav;
-
-    public Nodos(){
-    }
 
     /**
      * Método constructor

@@ -1,8 +1,6 @@
 package com.example;
 
-import java.io.Serializable;
-
-public class LinkedList implements Serializable{
+public class LinkedList{
     public String tag;
     public Nodos head;
     public Nodos tail;
@@ -12,9 +10,7 @@ public class LinkedList implements Serializable{
     /**
      * Método constructor
      */
-    public LinkedList(){
 
-    }
     public LinkedList(String tag) {
         this.tag = tag;
         this.head = null;
@@ -65,6 +61,7 @@ public class LinkedList implements Serializable{
         this.size = size;
     }
 
+
     /**
      * Método para añadir elementos a la lista
      */
@@ -76,7 +73,7 @@ public class LinkedList implements Serializable{
             nuevaSong.prev = head;
             tail = nuevaSong;
             current = head;
-            size++;
+            this.size++;
         } else {
             Nodos ultimo = head.prev;
             tail.next = nuevaSong;
@@ -84,7 +81,7 @@ public class LinkedList implements Serializable{
             tail = nuevaSong;
             head.prev = tail;
             tail.prev = ultimo;
-            size++;
+            this.size++;
         }
     }
     /**
@@ -95,15 +92,7 @@ public class LinkedList implements Serializable{
     /**
      * Método para mostrar los elementos de la lista
      */
-    public void showPlaylist() {
-        Nodos uno = head;
-        int breaker = 0;
-        while (breaker < this.size){
-            breaker++;
-            System.out.println(uno.getPath()+" - "+uno.getNombrecan()+" - "+uno.getFav());
-            uno = uno.next;
-        }
-    }
+
     /**
      * Método para mover al inicio de la lista el Nodo Current
      */
@@ -120,6 +109,16 @@ public class LinkedList implements Serializable{
      * Método para mover para atrás en la lista el Nodo Current
      */
     public void moveBackCurrent(){current = current.prev;}
+    public void showPlaylist() {
+        Nodos carro = head;
+        int breaker = 0;
+        while (breaker < this.size){
+            System.out.println(this.size);
+            System.out.println(carro.getPath()+" - "+carro.getNombrecan()+" - "+carro.getFav());
+            carro = carro.next;
+            breaker++;
+        }
+    }
 }
 
 

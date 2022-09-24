@@ -8,5 +8,8 @@
     <orderEntry type="library" name="tika-app-2.4.1" level="project" />
     <orderEntry type="library" name="jdom-2.0.6.1" level="project" />
     <orderEntry type="library" name="jmf-2.1.1e" level="project" />
+    <orderEntry type="library" name="media" level="project" />
+    <orderEntry type="library" name="javafx-media-18" level="project" />
+    <orderEntry type="library" name="javafx-media-18-win" level="project" />
   </component>
 </module>

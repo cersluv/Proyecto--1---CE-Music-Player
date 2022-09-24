@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="javafx-media-18">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-media/18/javafx-media-18.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-media/18/javafx-media-18.jar!/" recursive="false" />
+  </library>
+</component>

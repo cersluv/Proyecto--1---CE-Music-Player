@@ -3,6 +3,9 @@ module com.example.proyecto1_ce_musicplayer_carlosfelipe {
     requires javafx.fxml;
     requires java.xml;
     requires java.logging;
+    requires javafx.media;
+
+
 
 
     opens com.example.Apps to javafx.fxml;

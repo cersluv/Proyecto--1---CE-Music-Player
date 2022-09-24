@@ -1,5 +1,6 @@
 package com.example;
 
+import java.io.File;
 import java.io.Serializable;
 
 /**
@@ -8,7 +9,7 @@ import java.io.Serializable;
 public class songs implements Serializable {
 
     public String nombre;
-    public String path;
+    public File path;
     public String favorita;
 
 
@@ -16,7 +17,7 @@ public class songs implements Serializable {
         return nombre;
     }
 
-    public String getPath() {
+    public File getPath() {
         return path;
 
     }
@@ -29,7 +30,7 @@ public class songs implements Serializable {
         this.nombre = nombre;
     }
 
-    public void setPath(String path) {
+    public void setPath(File path) {
         this.path = path;
     }
 
@@ -40,7 +41,7 @@ public class songs implements Serializable {
     /**
      * Método Contructor de la clase "songs"
      */
-    public songs(String path, String nombre, String favorita) {
+    public songs(File path, String nombre, String favorita) {
         this.path = path;
         this.nombre = nombre;
         this.favorita = favorita;

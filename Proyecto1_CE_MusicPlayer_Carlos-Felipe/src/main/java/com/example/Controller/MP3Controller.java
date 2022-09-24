@@ -9,8 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -22,8 +25,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
-import java.security.MessageDigest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -40,6 +43,8 @@ import java.util.logging.Logger;
 public class MP3Controller {
     private Stage stage;
     private LoginController controlladorLogin;
+    private Media musica;
+    private MediaPlayer reproductor;
 
 
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -102,7 +107,7 @@ public class MP3Controller {
      * Variable para obtener Files de canciones
      */
     private File canci;
-    public LinkedList playlist = new LinkedList();
+    public LinkedList playlist = new LinkedList("1");
 
     @FXML
         // This method is called by the FXMLLoader when initialization is complete
@@ -261,7 +266,7 @@ public class MP3Controller {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(new File("Pop.xml"));
+        Document document = builder.parse(new File("Pa perrear.xml"));
         NodeList nodeList = document.getDocumentElement().getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
@@ -274,16 +279,26 @@ public class MP3Controller {
                 String favorite = elem.getElementsByTagName("favorita").item(0)
                         .getChildNodes().item(0).getNodeValue();
                 Nodos can = new Nodos(direccion, namesong, favorite);
-                playlist.añadir(direccion, namesong, favorite);
-            }
 
+                playlist.añadir(direccion, namesong, favorite);
+                //playlist.showPlaylist();
+            }
         }
+        File f = new File(playlist.current.getPath());
+        System.out.println(playlist.current.getPath());
+        URI dir = f.toURI();
+        musica = new Media(String.valueOf(dir));
+        reproductor = new MediaPlayer(musica);
     }
     public void reproducir(){
+        reproductor.play();
     }
     public void pausar(){
+        reproductor.pause();
     }
     public void reiniciar(){
+        reproductor.seek(Duration.seconds(0));
+        reproductor.play();
     }
     public void sigSong(){
     }
