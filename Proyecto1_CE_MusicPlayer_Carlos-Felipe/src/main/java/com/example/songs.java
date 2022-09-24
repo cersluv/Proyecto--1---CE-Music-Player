@@ -2,7 +2,9 @@ package com.example;
 
 import java.io.Serializable;
 
-
+/**
+ * Clase songs, la cual recolecta la información del nombre, path y si es favorita o no la canción.
+ */
 public class songs implements Serializable {
 
     public String nombre ;
@@ -34,7 +36,9 @@ public class songs implements Serializable {
     public void setFavorita(String favorita) {
         this.favorita = favorita;
     }
-
+    /**
+     * Método Contructor de la clase "songs"
+     */
     public songs(String path, String nombre, String favorita) {
         this.path = path;
         this.nombre = nombre;

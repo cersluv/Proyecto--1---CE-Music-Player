@@ -15,9 +15,13 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ * Clase de xml, contiene métodos para los archivos xml
+ */
 public class XML {
-
+    /**
+     * Crea bibliotecas de música, con un dato o varios.
+     */
     public static void main(String[] args) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

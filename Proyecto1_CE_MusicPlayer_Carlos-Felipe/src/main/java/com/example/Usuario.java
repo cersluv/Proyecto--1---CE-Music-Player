@@ -1,5 +1,7 @@
 package com.example;
-
+/**
+ * Clase usuario, sirve para agregar personas a la base de datos
+ */
 public class Usuario {
     private String nombre;
     private String contraseña;
@@ -19,7 +21,9 @@ public class Usuario {
     public String getProvincia() {
         return provincia;
     }
-
+    /**
+     * Método constructor
+     */
     public Usuario(String nombre, String contraseña, String correo, String provincia) {
         this.nombre = nombre;
         this.contraseña = contraseña;

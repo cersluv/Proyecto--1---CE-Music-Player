@@ -29,7 +29,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * Controlador de la pantalla principal, en este se mostraran los datos del usuario, agregar y crear bibliotecas
+ * musicales, y reproducirlas
+ *
+ */
 public class MP3Controller {
     private Stage stage;
     private LoginController controlladorLogin;
@@ -87,7 +91,9 @@ public class MP3Controller {
 
 
 
-
+    /**
+     * Variable para obtener Files de canciones
+     */
     private File canci;
 
 
@@ -98,16 +104,23 @@ public class MP3Controller {
         assert logout != null : "fx:id=\"logout\" was not injected: check your FXML file 'MP3Screen.fxml'.";
 
     }
-
+    /**
+     * Método para cerrar la pantalla
+     */
     public void btncerrar2(ActionEvent event) {
         stage.close();
     }
-
+    /**
+     * Método para cerrar sesión
+     */
     public void regresar(ActionEvent event) {
         controlladorLogin.show();
         stage.close();
     }
 
+    /**
+     * Método para mostrar en pantalla los datos del usuario, utilizando una lista simple.
+     */
     public void init(Stage stage, LoginController loginController, String[] list) {
         user1.setText(list[0]);
         correo1.setText(list[3]);
@@ -117,12 +130,17 @@ public class MP3Controller {
         this.controlladorLogin = loginController;
         this.stage = stage;
             }
+
     FileChooser seleccionador = new FileChooser();
 
     static List<songs> cancion = new ArrayList<>();
 
     String nombrec;
-
+    /**
+     * Método para crear un álbum, solo se puede agregar una canción mientras se crea el álbum
+     * Si se crean dos con el mismo nombre, se reescribe uno. Se selecciona una canción, y nos da tres objetos,
+     * Su nombre, path y si es favorita o no [esto úiltimo con una chechbox]
+     */
     @FXML
     public void getText(MouseEvent event) {
         int i = 0;
@@ -180,7 +198,10 @@ public class MP3Controller {
         }
 
     }
-
+    /**
+     * Método para agregar canciones a una biblioteca. Se tiene que poner el nombre exacto de la biblioteca a agregar la
+     * canción.
+     */
     @FXML
     public void addTo(MouseEvent event) throws ParserConfigurationException, IOException, SAXException, TransformerException {
         int i = 0;

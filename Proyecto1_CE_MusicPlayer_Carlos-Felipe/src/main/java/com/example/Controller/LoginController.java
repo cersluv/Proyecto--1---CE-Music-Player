@@ -24,7 +24,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-
+/**
+ * Controlador de la pantalla de loggeo, acá se ponen los datos del usuario y se inicia sesión con su cuenta.
+ * También lo envía a la pantalla de registro para agregar personas a la "base de datos"
+ */
 public class LoginController implements Initializable {
 
     private Stage stage;
@@ -64,6 +67,9 @@ public class LoginController implements Initializable {
         assert user != null : "fx:id=\"user\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 
     }
+    /**
+     * Finalizar el programa, cerrandolo.
+     */
     @FXML
     private void btncerrar(ActionEvent event) {
         Node source = null;
@@ -71,7 +77,9 @@ public class LoginController implements Initializable {
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
-
+    /**
+     * Autenticador de usuarios, utiliza un .txt para revisar que esté registrado.
+     */
     @FXML
     public void obtener(ActionEvent event)  {
         String path = "C:\\Users\\Yoshant\\Desktop\\Users.txt", usuario = user.getText(), contraseña = contra.getText();
@@ -105,6 +113,9 @@ public class LoginController implements Initializable {
 
 
     }
+    /**
+     * Cierra la pantalla de loggeo, y envía al usuario a hacerse una cuenta.
+     */
     @FXML
     public void registrar(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Register/Registro.fxml"));
@@ -117,6 +128,9 @@ public class LoginController implements Initializable {
         stage.show();
         this.stage.close();
     }
+    /**
+     * Método el cual define en cual stage se está trabajando
+     */
     public void setStage(Stage primaryStage){
         stage = primaryStage;
     }
@@ -124,7 +138,9 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
     }
-
+    /**
+     * Método el cual muestra la stage actual
+     */
     public void show() {
         stage.show();
     }

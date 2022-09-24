@@ -9,7 +9,10 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**
+ * Controlador para agregar gente a la base de datos [.txt]
+ * Crea objetos del tipo usuario.
+ */
 public class RegisterController implements Initializable {
     private Stage stage;
     private LoginController controlladorLogin;
@@ -56,7 +59,9 @@ public class RegisterController implements Initializable {
         provincia = "Limón";
         return provincia;
     }
-
+    /**
+     * Método el cual crea objetos del tipo usuario y los agrega a la base de datos.
+     */
     public void escribirtxt(ActionEvent event) throws IOException {
         String user = users.getText();
         String pass = contraseñas.getText();
