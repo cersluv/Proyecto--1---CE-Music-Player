@@ -107,9 +107,20 @@
                                 <Font name="Arial Rounded MT Bold" size="19.0" />
                             </font>
                         </Label>
-                        <CheckBox fx:id="fav" layoutX="324.0" layoutY="105.0" mnemonicParsing="false" text="¿Es fav?" />
+                        <CheckBox fx:id="fav" layoutX="320.0" layoutY="105.0" mnemonicParsing="false" text="¿Es favorita?" />
                         <TextField fx:id="biblioselec" layoutX="539.0" layoutY="101.0" />
-                        <CheckBox fx:id="fav2" layoutX="583.0" layoutY="69.0" mnemonicParsing="false" text="¿Es fav?" />
+                        <CheckBox fx:id="fav2" layoutX="570.0" layoutY="58.0" mnemonicParsing="false" text="¿Es favorita?" />
+                  <Label layoutX="522.0" layoutY="78.0" prefHeight="28.0" prefWidth="183.0" text="Biblioteca a agregarle canción">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="borrar" layoutX="562.0" layoutY="268.0" mnemonicParsing="false" onAction="#borrarPlaylist" style="-fx-background-color: #252525;" text="Borrar biblioteca" textFill="#1ed760" />
+                  <Label fx:id="nssa1" layoutX="523.0" layoutY="128.0" prefHeight="14.0" prefWidth="182.0">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="11.0" />
+                     </font>
+                  </Label>
                     </children></AnchorPane>
             </content>
         </Tab>
@@ -138,6 +149,11 @@
                   <Label fx:id="favorita" alignment="CENTER" layoutX="712.0" layoutY="367.0" prefHeight="49.0" prefWidth="44.0" style="-fx-background-color: #1ed760;" text="★" textFill="#252525" visible="false">
                      <font>
                         <Font size="33.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nssa3" layoutX="141.0" layoutY="29.0" prefHeight="14.0" prefWidth="320.0">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="11.0" />
                      </font>
                   </Label>
                </children></AnchorPane>

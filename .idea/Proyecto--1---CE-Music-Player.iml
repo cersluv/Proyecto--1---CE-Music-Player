@@ -11,5 +11,6 @@
     <orderEntry type="library" name="media" level="project" />
     <orderEntry type="library" name="javafx-media-18" level="project" />
     <orderEntry type="library" name="javafx-media-18-win" level="project" />
+    <orderEntry type="library" name="jssc-2.9.4" level="project" />
   </component>
 </module>

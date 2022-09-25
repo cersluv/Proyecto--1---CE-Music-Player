@@ -16,7 +16,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -100,9 +99,16 @@ public class MP3Controller implements Initializable {
 
     @FXML
     private Label nombresong;
-
+    @FXML
+    private Label nssa1;
+    @FXML
+    private Label nssa2;
+    @FXML
+    private Label nssa3;
     @FXML
     private Button charge;
+    @FXML
+    private Button borrar;
     @FXML
     private ProgressBar progreso;
     @FXML
@@ -179,6 +185,11 @@ public class MP3Controller implements Initializable {
         }
         String biblioteca = biblioname.getText();
         canci = seleccionador.showOpenDialog(new Stage());
+        if (canci == null){
+            nssa2.setText("No se seleccionó ningún archivo");
+        }else {
+            nssa2.setText("Biblioteca agregada a la cola de reproducción");
+        }
         nombrec = canci.getName();
         String cancan = String.valueOf(canci);
 
@@ -241,6 +252,11 @@ public class MP3Controller implements Initializable {
         String biblioteca = biblioselec.getText();
         System.out.println(biblioteca);
         canci = seleccionador.showOpenDialog(new Stage());
+        if (canci == null){
+            nssa1.setText("No se seleccionó ningún archivo");
+        }else {
+            nssa1.setText("Canción agregada");
+        }
         nombrec = canci.getName();
         String cancan = String.valueOf(canci);
 
@@ -276,14 +292,23 @@ public class MP3Controller implements Initializable {
 
 
     }
+    public void borrarPlaylist(ActionEvent event){
+        seleccionador.setInitialDirectory(new File("C:/Users/Yoshant/Desktop/Proyecto--1---CE-Music-Player"+"/"+usuario));
+        File biblio = seleccionador.showOpenDialog(new Stage());
+        biblio.delete();
+    }
 
     public void cargarbiblio(MouseEvent mouseEvent) throws ParserConfigurationException,
             SAXException, IOException {
-
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         seleccionador.setInitialDirectory(new File("C:/Users/Yoshant/Desktop/Proyecto--1---CE-Music-Player"+"/"+usuario));
         File biblio = seleccionador.showOpenDialog(new Stage());
+        if (biblio == null){
+            nssa3.setText("No se seleccionó ningún archivo");
+        }else {
+            nssa3.setText("Biblioteca agregada a la cola de reproducción");
+        }
         String biblioteca = String.valueOf(biblio);
         Document document = builder.parse(new File(biblioteca));
         NodeList nodeList = document.getDocumentElement().getChildNodes();
@@ -308,9 +333,8 @@ public class MP3Controller implements Initializable {
         URI dir = f.toURI();
         musica = new Media(dir.toString());
         reproductor = new MediaPlayer(musica);
-
-
     }
+
 
     public void reproducir(ActionEvent event) {
         favorita.setVisible(false);
@@ -329,10 +353,8 @@ public class MP3Controller implements Initializable {
     }
 
     public void reiniciar(ActionEvent event) {
-        reproductor.seek(Duration.seconds(0));
-        reproductor.play();
+        reproductor.stop();
         progreso.setProgress(0);
-        empezarTimer();
     }
 
     public void sigSong(ActionEvent event) {
