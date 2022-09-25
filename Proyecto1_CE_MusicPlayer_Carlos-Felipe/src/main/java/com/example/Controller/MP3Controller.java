@@ -282,6 +282,7 @@ public class MP3Controller implements Initializable {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
+        seleccionador.setInitialDirectory(new File("C:/Users/Yoshant/Desktop/Proyecto--1---CE-Music-Player"+"/"+usuario));
         File biblio = seleccionador.showOpenDialog(new Stage());
         String biblioteca = String.valueOf(biblio);
         Document document = builder.parse(new File(biblioteca));
