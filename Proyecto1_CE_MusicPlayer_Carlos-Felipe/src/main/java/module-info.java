@@ -4,9 +4,7 @@ module com.example.proyecto1_ce_musicplayer_carlosfelipe {
     requires java.xml;
     requires java.logging;
     requires javafx.media;
-
-
-
+    requires jssc;
 
     opens com.example.Apps to javafx.fxml;
     exports com.example.Apps;

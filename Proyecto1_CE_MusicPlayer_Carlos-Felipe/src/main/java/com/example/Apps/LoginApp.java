@@ -1,12 +1,14 @@
 package com.example.Apps;
 
 import com.example.Controller.LoginController;
+import com.example.Controller.MP3Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import jssc.SerialPortList;
 
 import java.io.IOException;
 
@@ -25,6 +27,8 @@ public class LoginApp extends Application {
         controller.setStage(primaryStage);
         primaryStage.getIcons().add(new Image("C:\\Users\\Yoshant\\Desktop\\Proyecto--1---CE-Music-Player\\Proyecto1_CE_MusicPlayer_Carlos-Felipe\\src\\Imagenes\\icono.png"));
         primaryStage.show();
+
+
     }
 
     public static void main(String[] args) {

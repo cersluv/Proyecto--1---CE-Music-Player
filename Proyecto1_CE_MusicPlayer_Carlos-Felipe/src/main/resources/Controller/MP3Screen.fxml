@@ -151,6 +151,11 @@
                         <Font size="33.0" />
                      </font>
                   </Label>
+                  <Button fx:id="arduino" layoutX="756.0" layoutY="475.0" mnemonicParsing="false" onAction="#activar" style="-fx-background-color: #252525;" text="Control" textFill="#1ed760">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="15.0" />
+                     </font>
+                  </Button>
                   <Label fx:id="nssa3" layoutX="141.0" layoutY="29.0" prefHeight="14.0" prefWidth="320.0">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="11.0" />

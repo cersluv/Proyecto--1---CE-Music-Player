@@ -16,6 +16,9 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import jssc.SerialPort;
+import jssc.SerialPortEvent;
+import jssc.SerialPortException;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -38,9 +41,8 @@ import java.util.logging.Logger;
 /**
  * Controlador de la pantalla principal, en este se mostraran los datos del usuario, agregar y crear bibliotecas
  * musicales, y reproducirlas
- *
  */
-public class MP3Controller implements Initializable {
+public class MP3Controller implements Initializable{
     private Stage stage;
     private LoginController controlladorLogin;
     private Media musica;
@@ -115,12 +117,13 @@ public class MP3Controller implements Initializable {
     private Slider volumen;
     @FXML
     private Label favorita;
+    @FXML
+    private Button arduino;
     private String usuario;
     private Timer timer;
     private TimerTask task;
     private boolean running;
-
-
+    private static SerialPort sp;
     /**
      * Variable para obtener Files de canciones
      */
@@ -185,9 +188,9 @@ public class MP3Controller implements Initializable {
         }
         String biblioteca = biblioname.getText();
         canci = seleccionador.showOpenDialog(new Stage());
-        if (canci == null){
+        if (canci == null) {
             nssa2.setText("No se seleccionó ningún archivo");
-        }else {
+        } else {
             nssa2.setText("Biblioteca agregada a la cola de reproducción");
         }
         nombrec = canci.getName();
@@ -223,7 +226,7 @@ public class MP3Controller implements Initializable {
             documento.getDocumentElement().appendChild(canciones);
 
             Source source = new DOMSource(documento);
-            Result result = new StreamResult(new File(String.valueOf(usuario)+"/"+biblioteca + ".xml"));
+            Result result = new StreamResult(new File(String.valueOf(usuario) + "/" + biblioteca + ".xml"));
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
@@ -252,9 +255,9 @@ public class MP3Controller implements Initializable {
         String biblioteca = biblioselec.getText();
         System.out.println(biblioteca);
         canci = seleccionador.showOpenDialog(new Stage());
-        if (canci == null){
+        if (canci == null) {
             nssa1.setText("No se seleccionó ningún archivo");
-        }else {
+        } else {
             nssa1.setText("Canción agregada");
         }
         nombrec = canci.getName();
@@ -263,7 +266,7 @@ public class MP3Controller implements Initializable {
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse(new File(String.valueOf(usuario)+"/"+biblioteca + ".xml"));
+        Document doc = docBuilder.parse(new File(String.valueOf(usuario) + "/" + biblioteca + ".xml"));
         doc.getDocumentElement().normalize();
         Node nodoRaiz = doc.getDocumentElement();
 
@@ -287,13 +290,14 @@ public class MP3Controller implements Initializable {
         TransformerFactory transFactory = TransformerFactory.newInstance();
         Transformer transformer = transFactory.newTransformer();
         DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(new File(usuario+"/"+biblioteca + ".xml"));
+        StreamResult result = new StreamResult(new File(usuario + "/" + biblioteca + ".xml"));
         transformer.transform(source, result);
 
 
     }
-    public void borrarPlaylist(ActionEvent event){
-        seleccionador.setInitialDirectory(new File("C:/Users/Yoshant/Desktop/Proyecto--1---CE-Music-Player"+"/"+usuario));
+
+    public void borrarPlaylist(ActionEvent event) {
+        seleccionador.setInitialDirectory(new File("C:/Users/Yoshant/Desktop/Proyecto--1---CE-Music-Player" + "/" + usuario));
         File biblio = seleccionador.showOpenDialog(new Stage());
         biblio.delete();
     }
@@ -302,11 +306,11 @@ public class MP3Controller implements Initializable {
             SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        seleccionador.setInitialDirectory(new File("C:/Users/Yoshant/Desktop/Proyecto--1---CE-Music-Player"+"/"+usuario));
+        seleccionador.setInitialDirectory(new File("C:/Users/Yoshant/Desktop/Proyecto--1---CE-Music-Player" + "/" + usuario));
         File biblio = seleccionador.showOpenDialog(new Stage());
-        if (biblio == null){
+        if (biblio == null) {
             nssa3.setText("No se seleccionó ningún archivo");
-        }else {
+        } else {
             nssa3.setText("Biblioteca agregada a la cola de reproducción");
         }
         String biblioteca = String.valueOf(biblio);
@@ -337,27 +341,39 @@ public class MP3Controller implements Initializable {
 
 
     public void reproducir(ActionEvent event) {
+        playmusic();
+        nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
+    }
+    public void playmusic(){
         favorita.setVisible(false);
         reproductor.play();
-        nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
         empezarTimer();
-        if(playlist.getCurrent().getFav().equals("1")){
+        if (playlist.getCurrent().getFav().equals("1")) {
             favorita.setVisible(true);
         }
-
     }
 
     public void pausar(ActionEvent event) {
+        parar();
+    }
+    public void parar(){
         reproductor.pause();
         cancelTimer();
     }
 
     public void reiniciar(ActionEvent event) {
+        regresar();
+    }
+    public void regresar(){
         reproductor.stop();
         progreso.setProgress(0);
     }
 
     public void sigSong(ActionEvent event) {
+        siguiente();
+        nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
+    }
+    public void siguiente(){
         favorita.setVisible(false);
         reproductor.stop();
         playlist.adelanteCurrent();
@@ -374,12 +390,15 @@ public class MP3Controller implements Initializable {
         if (running) {
             cancelTimer();
         }
-        if(playlist.getCurrent().getFav().equals("1")){
+        if (playlist.getCurrent().getFav().equals("1")) {
             favorita.setVisible(true);
         }
     }
-
-    public void antSong (ActionEvent event){
+    public void antSong(ActionEvent event) {
+        anterior();
+        nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
+    }
+    public void anterior(){
         favorita.setVisible(false);
         reproductor.stop();
         playlist.atrasCurrent();
@@ -390,17 +409,17 @@ public class MP3Controller implements Initializable {
         musica = new Media(dir.toString());
         reproductor = new MediaPlayer(musica);
         reproductor.play();
-        nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
         progreso.setProgress(0);
         empezarTimer();
         if (running) {
             cancelTimer();
         }
-        if(playlist.getCurrent().getFav().equals("1")){
+        if (playlist.getCurrent().getFav().equals("1")) {
             favorita.setVisible(true);
         }
     }
-    public void empezarTimer () {
+
+    public void empezarTimer() {
         timer = new Timer();
         task = new TimerTask() {
             @Override
@@ -426,27 +445,63 @@ public class MP3Controller implements Initializable {
                     if (running) {
                         cancelTimer();
                     }
-                    }
                 }
+            }
 
         };
         timer.scheduleAtFixedRate(task, 1000, 1000);
 
     }
-    public void cancelTimer(){
+
+    public void cancelTimer() {
         running = false;
         timer.cancel();
     }
-
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        volumen.valueProperty().addListener(new ChangeListener<Number>(){
+        volumen.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number t1) {
-                reproductor.setVolume(volumen.getValue()*0.01);
+                reproductor.setVolume(volumen.getValue() * 0.01);
             }
         });
         progreso.setStyle("-fx-accent: #252525");
+    }
+    public void activar(ActionEvent event){
+        conectar();
+
+    }
+    public void conectar(){
+        SerialPort port = new SerialPort("COM3");
+        try {
+            port.openPort();
+            port.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+            port.addEventListener((SerialPortEvent event) -> {
+                if (event.isRXCHAR()) {
+                    try {
+                        String p = port.readString();
+                        if(p.equals("1")){
+                            playmusic();
+                        }
+                        if(p.equals("2")){
+                            parar();
+                        }
+                        if(p.equals("3")){
+                            regresar();
+                        }
+                        if(p.equals("4")){
+                            siguiente();
+                        }
+                        if(p.equals("5")){
+                            anterior();
+                        }
+                    } catch (SerialPortException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } catch(SerialPortException e){
+            e.printStackTrace();
+        }
     }
 }
