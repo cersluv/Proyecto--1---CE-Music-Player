@@ -70,6 +70,15 @@ public class RegisterController implements Initializable {
             FileWriter w = new FileWriter("C:\\Users\\Yoshant\\Desktop\\Users.txt", true);
             w.write("\n"+user+","+pass+","+provincia+","+mail);
             w.close();
+            File directorio = new File("Proyecto--1---CE-Music-Player"+String.valueOf(users));
+            if (!directorio.exists()) {
+                if (directorio.mkdirs()) {
+                    System.out.println("Directorio creado");
+                }
+                }else {
+                    System.out.println("Error al crear directorio");
+            }
+
         }catch(IOException e){
             e.printStackTrace(System.out);
         }

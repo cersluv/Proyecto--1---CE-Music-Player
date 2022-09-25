@@ -212,7 +212,7 @@ public class MP3Controller implements Initializable {
             documento.getDocumentElement().appendChild(canciones);
 
             Source source = new DOMSource(documento);
-            Result result = new StreamResult(new File(biblioteca + ".xml"));
+            Result result = new StreamResult(new File(String.valueOf(usuario)+"/"+biblioteca + ".xml"));
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
@@ -247,7 +247,7 @@ public class MP3Controller implements Initializable {
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse(new File(biblioteca + ".xml"));
+        Document doc = docBuilder.parse(new File(String.valueOf(usuario)+"/"+biblioteca + ".xml"));
         doc.getDocumentElement().normalize();
         Node nodoRaiz = doc.getDocumentElement();
 
@@ -271,7 +271,7 @@ public class MP3Controller implements Initializable {
         TransformerFactory transFactory = TransformerFactory.newInstance();
         Transformer transformer = transFactory.newTransformer();
         DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(new File(biblioteca + ".xml"));
+        StreamResult result = new StreamResult(new File(usuario+"/"+biblioteca + ".xml"));
         transformer.transform(source, result);
 
 
