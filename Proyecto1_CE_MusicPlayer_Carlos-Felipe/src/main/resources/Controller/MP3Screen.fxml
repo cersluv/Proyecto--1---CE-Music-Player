@@ -22,12 +22,12 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="632.0" style="-fx-background-color: #1ed760;">
                     <children>
-                        <Button fx:id="cerrar2" layoutX="689.0" layoutY="14.0" mnemonicParsing="false" onAction="#btncerrar2" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: black;" text="Salir" textFill="#1ed760">
+                        <Button fx:id="cerrar2" layoutX="689.0" layoutY="14.0" mnemonicParsing="false" onAction="#btncerrar2" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #252525;" text="Salir" textFill="#1ed760">
                             <font>
                                 <Font name="Arial Rounded MT Bold" size="12.0" />
                             </font>
                         </Button>
-                        <Button fx:id="logout" layoutX="689.0" layoutY="52.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: black;" text="Cerrar Sesión" textFill="#1ed760">
+                        <Button fx:id="logout" layoutX="689.0" layoutY="52.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #252525;" text="Cerrar Sesión" textFill="#1ed760">
                             <font>
                                 <Font name="Arial Rounded MT Bold" size="12.0" />
                             </font>
@@ -100,8 +100,8 @@
                             </font>
                         </Label>
                         <Label fx:id="fecha" alignment="CENTER" layoutX="81.0" layoutY="356.0" prefHeight="17.0" prefWidth="332.0" text="label" />
-                        <Button fx:id="btnbuscar" layoutX="341.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#getText" style="-fx-background-color: black;" text="Crear" textFill="#1ed760" />
-                        <Button fx:id="btnagregar" layoutX="562.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#addTo" style="-fx-background-color: black;" text="Agregar canción" textFill="#1ed760" />
+                        <Button fx:id="btnbuscar" layoutX="341.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#getText" style="-fx-background-color: #252525;" text="Crear" textFill="#1ed760" />
+                        <Button fx:id="btnagregar" layoutX="562.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#addTo" style="-fx-background-color: #252525;" text="Agregar canción" textFill="#1ed760" />
                         <Label layoutX="543.0" layoutY="14.0" prefHeight="44.0" prefWidth="166.0" text="Editar Biblioteca">
                             <font>
                                 <Font name="Arial Rounded MT Bold" size="19.0" />
@@ -120,16 +120,26 @@
                   <Button fx:id="play" layoutX="413.0" layoutY="425.0" mnemonicParsing="false" onAction="#reproducir" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="⫸" textFill="#1ed760" />
                   <Button fx:id="pause" layoutX="354.0" layoutY="425.0" mnemonicParsing="false" onAction="#pausar" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="| |" textFill="#1ed760" />
                   <Button fx:id="reset" layoutX="468.0" layoutY="425.0" mnemonicParsing="false" onAction="#reiniciar" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="■" textFill="#1ed760" />
-                  <Button fx:id="next" layoutX="524.0" layoutY="425.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="&gt;&gt;" textFill="#1ed760" />
-                  <Button fx:id="previous" layoutX="298.0" layoutY="425.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="&lt;&lt;" textFill="#1ed760" />
-                  <ProgressBar layoutX="154.0" layoutY="382.0" prefHeight="18.0" prefWidth="552.0" progress="0.0" />
-                  <Slider layoutX="612.0" layoutY="435.0" prefHeight="14.0" prefWidth="94.0" />
-                  <Label fx:id="nombresong" alignment="CENTER" layoutX="129.0" layoutY="251.0" prefHeight="59.0" prefWidth="614.0" text="Label">
+                  <Button fx:id="next" layoutX="524.0" layoutY="425.0" mnemonicParsing="false" onAction="#sigSong" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="&gt;&gt;" textFill="#1ed760" />
+                  <Button fx:id="previous" layoutX="298.0" layoutY="425.0" mnemonicParsing="false" onAction="#antSong" prefHeight="33.0" prefWidth="34.0" style="-fx-background-color: #252525;" text="&lt;&lt;" textFill="#1ed760" />
+                  <ProgressBar fx:id="progreso" layoutX="154.0" layoutY="382.0" prefHeight="18.0" prefWidth="552.0" progress="0.0" />
+                  <Slider fx:id="volumen" layoutX="612.0" layoutY="435.0" prefHeight="14.0" prefWidth="94.0" value="50.0" />
+                  <Label fx:id="nombresong" alignment="CENTER" layoutX="129.0" layoutY="251.0" prefHeight="59.0" prefWidth="614.0" text="Seleccione una canción">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="49.0" />
                      </font>
                   </Label>
-                  <Button fx:id="charge" layoutX="22.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#cargarbiblio" style="-fx-background-color: black;" text="Cargar biblioteca" textFill="#1ed760" />
+                  <Button fx:id="charge" layoutX="22.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#cargarbiblio" style="-fx-background-color: #252525;" text="Cargar biblioteca" textFill="#1ed760" />
+                  <Label alignment="CENTER" layoutX="712.0" layoutY="367.0" prefHeight="49.0" prefWidth="44.0" style="-fx-background-color: #1ed760;" text="☆" textFill="#252525">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="favorita" alignment="CENTER" layoutX="712.0" layoutY="367.0" prefHeight="49.0" prefWidth="44.0" style="-fx-background-color: #1ed760;" text="★" textFill="#252525" visible="false">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
             </content>
         </Tab>

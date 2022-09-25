@@ -5,8 +5,11 @@ import com.example.LinkedList;
 import com.example.Nodos;
 import com.example.XML;
 import com.example.songs;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
@@ -29,9 +32,7 @@ import java.net.URI;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,7 +41,7 @@ import java.util.logging.Logger;
  * musicales, y reproducirlas
  *
  */
-public class MP3Controller {
+public class MP3Controller implements Initializable {
     private Stage stage;
     private LoginController controlladorLogin;
     private Media musica;
@@ -102,6 +103,17 @@ public class MP3Controller {
 
     @FXML
     private Button charge;
+    @FXML
+    private ProgressBar progreso;
+    @FXML
+    private Slider volumen;
+    @FXML
+    private Label favorita;
+    private String usuario;
+    private Timer timer;
+    private TimerTask task;
+    private boolean running;
+
 
     /**
      * Variable para obtener Files de canciones
@@ -116,12 +128,14 @@ public class MP3Controller {
         assert logout != null : "fx:id=\"logout\" was not injected: check your FXML file 'MP3Screen.fxml'.";
 
     }
+
     /**
      * Método para cerrar la pantalla
      */
     public void btncerrar2(ActionEvent event) {
         stage.close();
     }
+
     /**
      * Método para cerrar sesión
      */
@@ -137,17 +151,19 @@ public class MP3Controller {
         user1.setText(list[0]);
         correo1.setText(list[3]);
         prov1.setText(list[2]);
+        usuario = list[0];
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         fecha.setText(dtf.format(LocalDateTime.now()));
         this.controlladorLogin = loginController;
         this.stage = stage;
-            }
+    }
 
     FileChooser seleccionador = new FileChooser();
 
     static List<songs> cancion = new ArrayList<>();
 
     String nombrec;
+
     /**
      * Método para crear un álbum, solo se puede agregar una canción mientras se crea el álbum
      * Si se crean dos con el mismo nombre, se reescribe uno. Se selecciona una canción, y nos da tres objetos,
@@ -184,7 +200,7 @@ public class MP3Controller {
             canciones.appendChild(path);
 
             Element nombre = documento.createElement("nombre");
-            Text textNombre= documento.createTextNode(nombrec);
+            Text textNombre = documento.createTextNode(nombrec);
             nombre.appendChild(textNombre);
             canciones.appendChild(nombre);
 
@@ -196,20 +212,20 @@ public class MP3Controller {
             documento.getDocumentElement().appendChild(canciones);
 
             Source source = new DOMSource(documento);
-            Result result = new StreamResult(new File(biblioteca+ ".xml"));
+            Result result = new StreamResult(new File(biblioteca + ".xml"));
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
 
 
-
-        }catch (ParserConfigurationException ex){
+        } catch (ParserConfigurationException ex) {
             Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException e) {
             throw new RuntimeException(e);
         }
 
     }
+
     /**
      * Método para agregar canciones a una biblioteca. Se tiene que poner el nombre exacto de la biblioteca a agregar la
      * canción.
@@ -231,11 +247,11 @@ public class MP3Controller {
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse(new File(biblioteca+".xml"));
+        Document doc = docBuilder.parse(new File(biblioteca + ".xml"));
         doc.getDocumentElement().normalize();
         Node nodoRaiz = doc.getDocumentElement();
 
-        Element nuevaCancion=doc.createElement("cancion");
+        Element nuevaCancion = doc.createElement("cancion");
 
 
         Element nuevoPath = doc.createElement("path");
@@ -255,18 +271,20 @@ public class MP3Controller {
         TransformerFactory transFactory = TransformerFactory.newInstance();
         Transformer transformer = transFactory.newTransformer();
         DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(new File (biblioteca+".xml"));
+        StreamResult result = new StreamResult(new File(biblioteca + ".xml"));
         transformer.transform(source, result);
 
 
     }
 
     public void cargarbiblio(MouseEvent mouseEvent) throws ParserConfigurationException,
-            SAXException, IOException{
+            SAXException, IOException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(new File("Pa perrear.xml"));
+        File biblio = seleccionador.showOpenDialog(new Stage());
+        String biblioteca = String.valueOf(biblio);
+        Document document = builder.parse(new File(biblioteca));
         NodeList nodeList = document.getDocumentElement().getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
@@ -281,31 +299,131 @@ public class MP3Controller {
                 Nodos can = new Nodos(direccion, namesong, favorite);
 
                 playlist.añadir(direccion, namesong, favorite);
-                //playlist.showPlaylist();
             }
         }
         String arch1 = playlist.current.getPath();
-        String arch = arch1.replace("/","\\\\");
+        String arch = arch1.replace("/", "\\\\");
         File f = new File(arch);
         URI dir = f.toURI();
         musica = new Media(dir.toString());
         reproductor = new MediaPlayer(musica);
 
+
     }
-    public void reproducir(ActionEvent event){
+
+    public void reproducir(ActionEvent event) {
+        favorita.setVisible(false);
         reproductor.play();
+        nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
+        empezarTimer();
+        if(playlist.getCurrent().getFav().equals("1")){
+            favorita.setVisible(true);
+        }
+
     }
-    public void pausar(ActionEvent event){
+
+    public void pausar(ActionEvent event) {
         reproductor.pause();
+        cancelTimer();
     }
-    public void reiniciar(ActionEvent event){
+
+    public void reiniciar(ActionEvent event) {
         reproductor.seek(Duration.seconds(0));
         reproductor.play();
+        progreso.setProgress(0);
+        empezarTimer();
     }
-    public void sigSong(){
+
+    public void sigSong(ActionEvent event) {
+        favorita.setVisible(false);
+        reproductor.stop();
+        playlist.adelanteCurrent();
+        String arch1 = playlist.current.getPath();
+        String arch = arch1.replace("/", "\\\\");
+        File f = new File(arch);
+        URI dir = f.toURI();
+        musica = new Media(dir.toString());
+        reproductor = new MediaPlayer(musica);
+        reproductor.play();
+        nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
+        progreso.setProgress(0);
+        empezarTimer();
+        if (running) {
+            cancelTimer();
+        }
+        if(playlist.getCurrent().getFav().equals("1")){
+            favorita.setVisible(true);
+        }
     }
-    public void antSong(){
+
+    public void antSong (ActionEvent event){
+        favorita.setVisible(false);
+        reproductor.stop();
+        playlist.atrasCurrent();
+        String arch1 = playlist.current.getPath();
+        String arch = arch1.replace("/", "\\\\");
+        File f = new File(arch);
+        URI dir = f.toURI();
+        musica = new Media(dir.toString());
+        reproductor = new MediaPlayer(musica);
+        reproductor.play();
+        nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
+        progreso.setProgress(0);
+        empezarTimer();
+        if (running) {
+            cancelTimer();
+        }
+        if(playlist.getCurrent().getFav().equals("1")){
+            favorita.setVisible(true);
+        }
+    }
+    public void empezarTimer () {
+        timer = new Timer();
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                running = true;
+                double current1 = reproductor.getCurrentTime().toSeconds();
+                double end = musica.getDuration().toSeconds();
+                progreso.setProgress(current1 / end);
+                if (current1 / end == 1) {
+                    cancelTimer();
+                    reproductor.stop();
+                    playlist.adelanteCurrent();
+                    String arch1 = playlist.current.getPath();
+                    String arch = arch1.replace("/", "\\\\");
+                    File f = new File(arch);
+                    URI dir = f.toURI();
+                    musica = new Media(dir.toString());
+                    reproductor = new MediaPlayer(musica);
+                    reproductor.play();
+                    nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
+                    progreso.setProgress(0);
+                    empezarTimer();
+                    if (running) {
+                        cancelTimer();
+                    }
+                    }
+                }
+
+        };
+        timer.scheduleAtFixedRate(task, 1000, 1000);
+
+    }
+    public void cancelTimer(){
+        running = false;
+        timer.cancel();
     }
 
 
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        volumen.valueProperty().addListener(new ChangeListener<Number>(){
+            @Override
+            public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number t1) {
+                reproductor.setVolume(volumen.getValue()*0.01);
+            }
+        });
+        progreso.setStyle("-fx-accent: #252525");
+    }
 }

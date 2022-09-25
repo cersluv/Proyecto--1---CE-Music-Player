@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<biblioteca>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><biblioteca>
     <Cancion>
         <path>C:\Users\Yoshant\Documents\Felipe\canciones\AnotherLove.mp3</path>
         <nombre>AnotherLove.mp3</nombre>
@@ -10,4 +9,4 @@
         <nombre>Jardin.mp3</nombre>
         <favorita>1</favorita>
     </cancion>
-</biblioteca>
+<cancion><path>C:\Users\Yoshant\Documents\Felipe\canciones\Sonido.mp3</path><nombre>Sonido.mp3</nombre><favorita>0</favorita></cancion></biblioteca>

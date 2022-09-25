@@ -104,21 +104,12 @@ public class LinkedList{
     /**
      * Método para mover para adelante en la lista el Nodo Current
      */
-    public void moveForwardCurrent(){current = current.next;}
+    public void adelanteCurrent(){current = current.next;}
     /**
      * Método para mover para atrás en la lista el Nodo Current
      */
-    public void moveBackCurrent(){current = current.prev;}
-    public void showPlaylist() {
-        Nodos carro = head;
-        int breaker = 0;
-        while (breaker < this.size){
-            System.out.println(this.size);
-            System.out.println(carro.getPath()+" - "+carro.getNombrecan()+" - "+carro.getFav());
-            carro = carro.next;
-            breaker++;
-        }
-    }
+    public void atrasCurrent(){current = current.prev;}
+
 }
 
 
