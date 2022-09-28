@@ -191,7 +191,7 @@ public class MP3Controller implements Initializable{
         //seleccionador.getExtensionFilters().addAll(ex1);
         canci = seleccionador.showOpenDialog(new Stage());
         if (canci == null) {
-            //nssa2.setText("No se seleccionó ningún archivo");
+            nssa2.setText("No se pueden crear biliotecas, sin minimo una canción dentro");
             System.out.println(-1);
         } else {
             nssa2.setText("Biblioteca Creada");
