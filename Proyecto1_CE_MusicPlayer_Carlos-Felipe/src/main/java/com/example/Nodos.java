@@ -1,5 +1,7 @@
 package com.example;
-
+/**
+ * Clase nosods, utilizada para almacenar los objetos canciones.
+ */
 public class Nodos{
     public String path;
     public String nombrecan;

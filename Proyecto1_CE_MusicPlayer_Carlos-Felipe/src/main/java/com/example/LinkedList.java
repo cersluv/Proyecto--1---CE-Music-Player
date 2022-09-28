@@ -1,5 +1,8 @@
 package com.example;
-
+/**
+ * Clase de la lista doblemente enlazada circular, la cual es utilizada para almacenar los nodos y poder avanzar entre
+ * ellos libremente. Una vez al final de esta, nos envía al inicio nuevamente.
+ */
 public class LinkedList{
     public String tag;
     public Nodos head;

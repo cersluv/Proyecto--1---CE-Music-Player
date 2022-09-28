@@ -179,65 +179,69 @@ public class MP3Controller implements Initializable{
      * Su nombre, path y si es favorita o no [esto úiltimo con una chechbox]
      */
     @FXML
-    public void getText(MouseEvent event) {
+    public void getText(MouseEvent event){
         int i = 0;
         if (fav.isSelected()) {
             i = 1;
         } else {
             i = 0;
         }
+        //FileChooser.ExtensionFilter ex1= new FileChooser.ExtensionFilter("MP3 files", ".mp3");
         String biblioteca = biblioname.getText();
+        //seleccionador.getExtensionFilters().addAll(ex1);
         canci = seleccionador.showOpenDialog(new Stage());
         if (canci == null) {
-            nssa2.setText("No se seleccionó ningún archivo");
+            //nssa2.setText("No se seleccionó ningún archivo");
+            System.out.println(-1);
         } else {
-            nssa2.setText("Biblioteca agregada a la cola de reproducción");
+            nssa2.setText("Biblioteca Creada");
+
+            nombrec = canci.getName();
+            String cancan = String.valueOf(canci);
+
+            try {
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                DOMImplementation implementation = builder.getDOMImplementation();
+
+                Document documento = implementation.createDocument(null, "biblioteca", null);
+                documento.setXmlVersion("1.0");
+
+
+                Element canciones = documento.createElement("Cancion");
+
+
+                Element path = documento.createElement("path");
+                Text textPath = documento.createTextNode(cancan);
+                path.appendChild(textPath);
+                canciones.appendChild(path);
+
+                Element nombre = documento.createElement("nombre");
+                Text textNombre = documento.createTextNode(nombrec);
+                nombre.appendChild(textNombre);
+                canciones.appendChild(nombre);
+
+                Element favorita = documento.createElement("favorita");
+                Text textFav = documento.createTextNode(Integer.toString(i));
+                favorita.appendChild(textFav);
+                canciones.appendChild(favorita);
+
+                documento.getDocumentElement().appendChild(canciones);
+
+                Source source = new DOMSource(documento);
+                Result result = new StreamResult(new File(String.valueOf(usuario) + "/" + biblioteca + ".xml"));
+
+                Transformer transformer = TransformerFactory.newInstance().newTransformer();
+                transformer.transform(source, result);
+
+
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerException e) {
+                throw new RuntimeException(e);
+            }
+
         }
-        nombrec = canci.getName();
-        String cancan = String.valueOf(canci);
-
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            DOMImplementation implementation = builder.getDOMImplementation();
-
-            Document documento = implementation.createDocument(null, "biblioteca", null);
-            documento.setXmlVersion("1.0");
-
-
-            Element canciones = documento.createElement("Cancion");
-
-
-            Element path = documento.createElement("path");
-            Text textPath = documento.createTextNode(cancan);
-            path.appendChild(textPath);
-            canciones.appendChild(path);
-
-            Element nombre = documento.createElement("nombre");
-            Text textNombre = documento.createTextNode(nombrec);
-            nombre.appendChild(textNombre);
-            canciones.appendChild(nombre);
-
-            Element favorita = documento.createElement("favorita");
-            Text textFav = documento.createTextNode(Integer.toString(i));
-            favorita.appendChild(textFav);
-            canciones.appendChild(favorita);
-
-            documento.getDocumentElement().appendChild(canciones);
-
-            Source source = new DOMSource(documento);
-            Result result = new StreamResult(new File(String.valueOf(usuario) + "/" + biblioteca + ".xml"));
-
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.transform(source, result);
-
-
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
     /**
@@ -259,40 +263,40 @@ public class MP3Controller implements Initializable{
             nssa1.setText("No se seleccionó ningún archivo");
         } else {
             nssa1.setText("Canción agregada");
+            nombrec = canci.getName();
+            String cancan = String.valueOf(canci);
+
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(new File(String.valueOf(usuario) + "/" + biblioteca + ".xml"));
+            doc.getDocumentElement().normalize();
+            Node nodoRaiz = doc.getDocumentElement();
+
+            Element nuevaCancion = doc.createElement("cancion");
+
+
+            Element nuevoPath = doc.createElement("path");
+            nuevoPath.setTextContent(cancan);
+            nuevaCancion.appendChild(nuevoPath);
+
+            Element nuevoNombre = doc.createElement("nombre");
+            nuevoNombre.setTextContent(nombrec);
+            nuevaCancion.appendChild(nuevoNombre);
+
+            Element nuevoFavorita = doc.createElement("favorita");
+            nuevoFavorita.setTextContent(Integer.toString(i));
+            nuevaCancion.appendChild(nuevoFavorita);
+
+            nodoRaiz.appendChild(nuevaCancion);
+
+            TransformerFactory transFactory = TransformerFactory.newInstance();
+            Transformer transformer = transFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(usuario + "/" + biblioteca + ".xml"));
+            transformer.transform(source, result);
+
         }
-        nombrec = canci.getName();
-        String cancan = String.valueOf(canci);
-
-
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse(new File(String.valueOf(usuario) + "/" + biblioteca + ".xml"));
-        doc.getDocumentElement().normalize();
-        Node nodoRaiz = doc.getDocumentElement();
-
-        Element nuevaCancion = doc.createElement("cancion");
-
-
-        Element nuevoPath = doc.createElement("path");
-        nuevoPath.setTextContent(cancan);
-        nuevaCancion.appendChild(nuevoPath);
-
-        Element nuevoNombre = doc.createElement("nombre");
-        nuevoNombre.setTextContent(nombrec);
-        nuevaCancion.appendChild(nuevoNombre);
-
-        Element nuevoFavorita = doc.createElement("favorita");
-        nuevoFavorita.setTextContent(Integer.toString(i));
-        nuevaCancion.appendChild(nuevoFavorita);
-
-        nodoRaiz.appendChild(nuevaCancion);
-
-        TransformerFactory transFactory = TransformerFactory.newInstance();
-        Transformer transformer = transFactory.newTransformer();
-        DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(new File(usuario + "/" + biblioteca + ".xml"));
-        transformer.transform(source, result);
-
 
     }
 
@@ -312,38 +316,46 @@ public class MP3Controller implements Initializable{
             nssa3.setText("No se seleccionó ningún archivo");
         } else {
             nssa3.setText("Biblioteca agregada a la cola de reproducción");
-        }
-        String biblioteca = String.valueOf(biblio);
-        Document document = builder.parse(new File(biblioteca));
-        NodeList nodeList = document.getDocumentElement().getChildNodes();
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element elem = (Element) node;
-                String direccion = elem.getElementsByTagName("path")
-                        .item(0).getChildNodes().item(0).getNodeValue();
-                String namesong = elem.getElementsByTagName("nombre").item(0)
-                        .getChildNodes().item(0).getNodeValue();
-                String favorite = elem.getElementsByTagName("favorita").item(0)
-                        .getChildNodes().item(0).getNodeValue();
-                Nodos can = new Nodos(direccion, namesong, favorite);
 
-                playlist.añadir(direccion, namesong, favorite);
+            String biblioteca = String.valueOf(biblio);
+            Document document = builder.parse(new File(biblioteca));
+            NodeList nodeList = document.getDocumentElement().getChildNodes();
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element elem = (Element) node;
+                    String direccion = elem.getElementsByTagName("path")
+                            .item(0).getChildNodes().item(0).getNodeValue();
+                    String namesong = elem.getElementsByTagName("nombre").item(0)
+                            .getChildNodes().item(0).getNodeValue();
+                    String favorite = elem.getElementsByTagName("favorita").item(0)
+                            .getChildNodes().item(0).getNodeValue();
+                    Nodos can = new Nodos(direccion, namesong, favorite);
+
+                    playlist.añadir(direccion, namesong, favorite);
+                }
             }
+            String arch1 = playlist.current.getPath();
+            String arch = arch1.replace("/", "\\\\");
+            File f = new File(arch);
+            URI dir = f.toURI();
+            musica = new Media(dir.toString());
+            reproductor = new MediaPlayer(musica);
         }
-        String arch1 = playlist.current.getPath();
-        String arch = arch1.replace("/", "\\\\");
-        File f = new File(arch);
-        URI dir = f.toURI();
-        musica = new Media(dir.toString());
-        reproductor = new MediaPlayer(musica);
+
     }
 
-
+    /**
+     * Método reproducir la música presionando el botón "play"
+     */
     public void reproducir(ActionEvent event) {
         playmusic();
         nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
     }
+    /**
+     * Método que reproduce la canción, sin necesidad de presionar un botón, para contrarrestar los "action event", ya
+     * que provoca conflictos con el arduino
+     */
     public void playmusic(){
         favorita.setVisible(false);
         reproductor.play();
@@ -352,27 +364,45 @@ public class MP3Controller implements Initializable{
             favorita.setVisible(true);
         }
     }
-
+    /**
+     * Método para pausar el audio reproduciendose, presionando un botón
+     */
     public void pausar(ActionEvent event) {
         parar();
     }
+    /**
+     * Método para pausar el audio reproduciendose, sin necesidad de presionar un botón, para contrarrestar los
+     * "action event" ya que provoca conflictos con el arduino
+     */
     public void parar(){
         reproductor.pause();
         cancelTimer();
     }
-
+    /**
+     * Método para reiniciar el audio reproduciendose, presionando un botón.
+     */
     public void reiniciar(ActionEvent event) {
         regresar();
     }
+    /**
+     * Método para reiniciar el audio reproduciendose, sin necesidad de presionar un botón, para contrarrestar
+     * los "action event" ya que provoca conflictos con el arduino
+     */
     public void regresar(){
         reproductor.stop();
         progreso.setProgress(0);
     }
-
+    /**
+     * Método para reproducir el siguiente audio en la biblioteca musical, presionando un botón.
+     */
     public void sigSong(ActionEvent event) {
         siguiente();
         nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
     }
+    /**
+     * Método para reproducir el siguiente audio en la biblioteca musical, sin la necesidad de presionar un botón, esto
+     * para contrarrestar los "action event" ya que provoca conflictos con el arduino.
+     */
     public void siguiente(){
         favorita.setVisible(false);
         reproductor.stop();
@@ -394,10 +424,17 @@ public class MP3Controller implements Initializable{
             favorita.setVisible(true);
         }
     }
+    /**
+     * Método para reproducir el audio anterior en la biblioteca musical, presionando un botón.
+     */
     public void antSong(ActionEvent event) {
         anterior();
         nombresong.setText(playlist.current.getNombrecan().replace(".mp3", ""));
     }
+    /**
+     * Método para reproducir el audio anterior en la biblioteca musical, sin la necesidad de presionar un botón, esto
+     * para contrarrestar los "action event" ya que provoca conflictos con el arduino.
+     */
     public void anterior(){
         favorita.setVisible(false);
         reproductor.stop();
@@ -418,7 +455,9 @@ public class MP3Controller implements Initializable{
             favorita.setVisible(true);
         }
     }
-
+    /**
+     * Método para iniciar la barra de progreso de la canción.
+     */
     public void empezarTimer() {
         timer = new Timer();
         task = new TimerTask() {
@@ -452,11 +491,17 @@ public class MP3Controller implements Initializable{
         timer.scheduleAtFixedRate(task, 1000, 1000);
 
     }
-
+    /**
+     * Método para pader cancelar el aumento de la barra de progreso, para poder hacer acciones como pausar, o reiniciar
+     * la canción.
+     */
     public void cancelTimer() {
         running = false;
         timer.cancel();
     }
+    /**
+     * Método para poder ajustar la barra de sonido.
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         volumen.valueProperty().addListener(new ChangeListener<Number>() {
@@ -467,10 +512,16 @@ public class MP3Controller implements Initializable{
         });
         progreso.setStyle("-fx-accent: #252525");
     }
+    /**
+     * Método para inicializar el arduino al presionar un botón
+     */
     public void activar(ActionEvent event){
         conectar();
 
     }
+    /**
+     * Método para inicializar y conectar el arduino.
+     */
     public void conectar(){
         SerialPort port = new SerialPort("COM3");
         try {

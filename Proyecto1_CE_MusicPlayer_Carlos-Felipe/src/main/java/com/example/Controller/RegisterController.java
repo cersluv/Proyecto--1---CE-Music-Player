@@ -86,8 +86,6 @@ public class RegisterController implements Initializable {
         stage.close();
         }
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

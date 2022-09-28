@@ -48,7 +48,9 @@ public class songs implements Serializable {
 
     }
 
-
+    /**
+     * Método para transformar la clase en un String
+     */
     @Override
     public String toString() {
         return "[" + path + ", " + nombre + ", " + favorita + "]";
