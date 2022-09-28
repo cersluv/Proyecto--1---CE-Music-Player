@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -30,6 +31,8 @@ public class RegisterController implements Initializable {
     public void init(Stage stage, LoginController loginController) {
         this.controlladorLogin = loginController;
         this.stage = stage;
+        stage.getIcons().add(new Image("C:\\Users\\Yoshant\\Desktop\\Proyecto--1---CE-Music-Player\\Proyecto1_CE_MusicPlayer_Carlos-Felipe\\src\\Imagenes\\icono.png"));
+
     }
     public String province1(ActionEvent event){
         provincia = "San José";

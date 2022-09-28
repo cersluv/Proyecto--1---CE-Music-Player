@@ -5,12 +5,14 @@ import com.example.LinkedList;
 import com.example.Nodos;
 import com.example.XML;
 import com.example.songs;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -114,7 +116,8 @@ public class MP3Controller implements Initializable{
     @FXML
     private ProgressBar progreso;
     @FXML
-    private Slider volumen;
+    private ChoiceBox<String> volumen;
+    private String[] volumenes = {"0%","20%","40%","60%","80%","100%" };
     @FXML
     private Label favorita;
     @FXML
@@ -157,6 +160,7 @@ public class MP3Controller implements Initializable{
      * Método para mostrar en pantalla los datos del usuario, utilizando una lista simple.
      */
     public void init(Stage stage, LoginController loginController, String[] list) {
+        stage.getIcons().add(new Image("C:\\Users\\Yoshant\\Desktop\\Proyecto--1---CE-Music-Player\\Proyecto1_CE_MusicPlayer_Carlos-Felipe\\src\\Imagenes\\icono.png"));
         user1.setText(list[0]);
         correo1.setText(list[3]);
         prov1.setText(list[2]);
@@ -192,7 +196,6 @@ public class MP3Controller implements Initializable{
         canci = seleccionador.showOpenDialog(new Stage());
         if (canci == null) {
             nssa2.setText("No se pueden crear biliotecas, sin minimo una canción dentro");
-            System.out.println(-1);
         } else {
             nssa2.setText("Biblioteca Creada");
 
@@ -257,7 +260,6 @@ public class MP3Controller implements Initializable{
             i = 0;
         }
         String biblioteca = biblioselec.getText();
-        System.out.println(biblioteca);
         canci = seleccionador.showOpenDialog(new Stage());
         if (canci == null) {
             nssa1.setText("No se seleccionó ningún archivo");
@@ -504,13 +506,17 @@ public class MP3Controller implements Initializable{
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        volumen.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number t1) {
-                reproductor.setVolume(volumen.getValue() * 0.01);
-            }
-        });
+        volumen.getItems().addAll(volumenes);
+        volumen.setOnAction(this::getVolume);
         progreso.setStyle("-fx-accent: #252525");
+    }
+    public void getVolume(ActionEvent event){
+        String volume = (volumen.getValue().replace("%", ""));
+        int volumeSelected = Integer.valueOf(volume);
+        reproductor.setVolume(volumeSelected*0.01);
+    }
+    public void setVolume1(int volumeS){
+        reproductor.setVolume(volumeS*0.01);
     }
     /**
      * Método para inicializar el arduino al presionar un botón
@@ -519,6 +525,7 @@ public class MP3Controller implements Initializable{
         conectar();
 
     }
+
     /**
      * Método para inicializar y conectar el arduino.
      */
@@ -546,6 +553,24 @@ public class MP3Controller implements Initializable{
                         if(p.equals("5")){
                             anterior();
                         }
+                        if(p.equals("a")){
+                            setVolume1(0);
+                        }
+                        if(p.equals("b")){
+                            setVolume1(20);
+                        }
+                        if(p.equals("c")){
+                            setVolume1(40);
+                        }
+                        if(p.equals("d")){
+                            setVolume1(60);
+                        }
+                        if(p.equals("e")){
+                            setVolume1(80);
+                        }
+                        if(p.equals("f")){
+                            setVolume1(100);
+                        }
                     } catch (SerialPortException e) {
                         e.printStackTrace();
                     }
@@ -554,5 +579,21 @@ public class MP3Controller implements Initializable{
         } catch(SerialPortException e){
             e.printStackTrace();
         }
+    }
+    @FXML
+    public void pago(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Premium/Pagopremium.fxml"));
+        Parent root = loader.load();
+        Premium controller = loader.getController();
+        Scene scene = new Scene (root);
+        Stage stage = new Stage ();
+        stage.setScene(scene);
+        controller.init(stage, this);
+        stage.show();
+        this.stage.close();
+    }
+
+    public void show() {
+        stage.show();
     }
 }

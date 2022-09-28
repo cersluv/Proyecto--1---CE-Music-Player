@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="256.0" prefWidth="602.0" style="-fx-background-color: #1ed760;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controller.Premium">
+   <children>
+      <Label layoutX="68.0" layoutY="76.0" text="¡Podés pagar tu cuenta premium aquí!">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="270.0" layoutY="153.0" text="Sinpe:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="249.0" layoutY="194.0" text="8572-5978">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="cerrar3" layoutX="563.0" layoutY="14.0" mnemonicParsing="false" onAction="#cerrar" style="-fx-background-color: red;" text="X" textFill="WHITE">
+         <font>
+            <Font name="ArtifaktElement-Heavy" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="34.0" layoutY="120.0" text="Y activá funciones como quitar anuncios y la reproducción de playlists seleccionadas">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
